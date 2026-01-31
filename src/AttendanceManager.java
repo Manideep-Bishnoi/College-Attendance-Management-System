@@ -3,14 +3,14 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class AttendanceManager {
-    // Database Credentials
+  
     private static final String URL = "jdbc:mysql://localhost:3306/attendance_system";
-    private static final String USER = "root"; // CHANGE THIS if needed
-    private static final String PASSWORD = "manideep@2027"; // CHANGE THIS if needed
+    private static final String USER = "root"; 
+    private static final String PASSWORD = System.getenv("DB_PASSWORD");
 
     public static void main(String[] args) {
         try {
-            // Load MySQL Driver
+
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             System.out.println("MySQL JDBC Driver not found! Include the jar in your classpath.");
@@ -36,9 +36,9 @@ public class AttendanceManager {
                 int choice = -1;
                 if (scanner.hasNextInt()) {
                     choice = scanner.nextInt();
-                    scanner.nextLine(); // consume newline
+                    scanner.nextLine(); 
                 } else {
-                    scanner.nextLine(); // clean buffer
+                    scanner.nextLine(); 
                 }
 
                 switch (choice) {
@@ -88,7 +88,7 @@ public class AttendanceManager {
         System.out.print("Enter Roll Number: ");
         String roll = scanner.nextLine();
 
-        // Get Student ID first
+        
         int studentId = getStudentIdByRoll(conn, roll);
         if (studentId == -1) {
             System.out.println("Student not found!");
@@ -141,7 +141,7 @@ public class AttendanceManager {
     private static void updateAttendance(Connection conn, Scanner scanner) throws SQLException {
         System.out.print("Enter Attendance Record ID to Update (from View menu): ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // consume newline
+        scanner.nextLine(); 
 
         System.out.print("Enter New Status (Present/Absent/Leave): ");
         String status = scanner.nextLine();
